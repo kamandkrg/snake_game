@@ -1,3 +1,4 @@
+import os
 import pygame
 
 
@@ -16,7 +17,8 @@ class Snake:
             [100, 50],
         ]
         self.rotate = None
-        self.player_image = pygame.image.load('image_snake/left.png').convert()
+        image = os.path.abspath(os.path.join(os.path.dirname(__file__), 'image_snake/down.png'))
+        self.player_image = pygame.image.load(image).convert_alpha()
         self.player_image = pygame.transform.scale(self.player_image, (30, 30))
         self.player_rect = self.player_image.get_rect()
         self.player_rect.x = 140
@@ -42,17 +44,19 @@ class Snake:
             self.player_image = pygame.transform.rotate(self.player_image, -90)
 
     def move_auto(self, key):
-        if key[pygame.K_LEFT] and self.auto_x <= 0:
+        if key[pygame.K_LEFT] and self.auto_x <= 0 and self.rotate != 0:
             rotate_x = self.auto_x
             rotate_y = self.auto_y
             self.auto_x = -self.speed
             self.auto_y = 0
+            self.rotate = 0
             self.rotate_image(rotate_x, rotate_y)
-        if key[pygame.K_RIGHT] and self.auto_x >= 0:
+        if key[pygame.K_RIGHT] and self.auto_x >= 0 and self.rotate != 1:
             rotate_x = self.auto_x
             rotate_y = self.auto_y
             self.auto_x = self.speed
             self.auto_y = 0
+            self.rotate = 1
             self.rotate_image(rotate_x, rotate_y)
 
         if key[pygame.K_UP] and self.auto_y <= 0 and self.rotate != 2:
@@ -90,4 +94,3 @@ class Snake:
 
     def add_body(self):
         self.body_snake.append([self.player_rect.x, self.player_rect.y])
-
