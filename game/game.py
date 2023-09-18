@@ -15,9 +15,19 @@ class Game:
         self.width = width
         self.height = height
         self.snake = None
-        pygame.display.set_caption(caption)
+        self.caption = caption
+        pygame.display.set_caption(self.caption)
         self.y_food = random.randrange(50, 450, 10)
         self.x_food = random.randrange(50, 450, 10)
+        self.pause = False
+        self.add_food()
+
+    def restart(self):
+        self.snake.restart()
+        self.height_blit = 0
+        self.width_blit = 0
+        self.background = pygame.image.load(os.path.join(os.path.dirname(__file__), 'background/background.jpg'))
+        self.win.blit(self.background, (self.width_blit, self.height_blit))
         self.pause = False
         self.add_food()
 

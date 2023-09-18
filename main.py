@@ -17,7 +17,7 @@ if __name__ == '__main__':
     while run == 2:
         run = game.play()
         if run == 1:
-            game = setup()
+            game.restart()
             run = 2
 
 

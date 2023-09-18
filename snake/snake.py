@@ -25,6 +25,24 @@ class Snake:
         self.player_rect.y = 50
         self.player_image = pygame.transform.rotate(self.player_image, 90)
 
+    def restart(self):
+        self.auto_x = 10
+        self.auto_y = 0
+        self.body_snake = [
+            [140, 50],
+            [130, 50],
+            [120, 50],
+            [110, 50],
+            [100, 50],
+        ]
+        self.rotate = None
+        image = os.path.abspath(os.path.join(os.path.dirname(__file__), 'image_snake/down.png'))
+        self.player_image = pygame.image.load(image).convert_alpha()
+        self.player_image = pygame.transform.scale(self.player_image, (30, 30))
+        self.player_rect.x = 140
+        self.player_rect.y = 50
+        self.player_image = pygame.transform.rotate(self.player_image, 90)
+
     def rotate_image(self, rotate_x, rotate_y):
         if rotate_x < 0 < self.auto_y:
             self.player_image = pygame.transform.rotate(self.player_image, 90)
